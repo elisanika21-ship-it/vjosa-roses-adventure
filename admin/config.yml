@@ -1,5 +1,3 @@
-
-
 backend:
   name: github
   repo: elisanika21-ship-it/vjosa-roses-adventure
@@ -7,20 +5,108 @@ backend:
   base_url: https://vjosa-roses-auth.elisanika21.workers.dev
   auth_endpoint: /auth
 
-
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
+publish: true
 
 collections:
+  - name: "site_settings"
+    label: "01 · Logoja, Kontaktet & Tekstet"
+    label_singular: "Konfigurimi i website-it"
+    files:
+      - name: "settings"
+        label: "Faqja Kryesore / Home"
+        file: "content/site.json"
+        format: "json"
+        fields:
+          - {label: "Emri i biznesit", name: "business_name", widget: "string"}
+          - {label: "Logo horizontale", name: "logo", widget: "image", required: false}
+          - {label: "Foto horizontale kryesore (Hero)", name: "hero_image", widget: "image", required: false}
+          - {label: "Titulli EN", name: "hero_title_en", widget: "string"}
+          - {label: "Titulli SQ", name: "hero_title_sq", widget: "string"}
+          - {label: "Teksti mbi titullin EN", name: "hero_eyebrow_en", widget: "string"}
+          - {label: "Teksti mbi titullin SQ", name: "hero_eyebrow_sq", widget: "string"}
+          - {label: "Slogani EN", name: "hero_subtitle_en", widget: "string"}
+          - {label: "Slogani SQ", name: "hero_subtitle_sq", widget: "string"}
+          - {label: "Rreth nesh EN", name: "about_en", widget: "text"}
+          - {label: "Rreth nesh SQ", name: "about_sq", widget: "text"}
+          - {label: "Kontakti EN", name: "contact_intro_en", widget: "text"}
+          - {label: "Kontakti SQ", name: "contact_intro_sq", widget: "text"}
+          - {label: "Shënimi i çmimeve orientuese EN", name: "market_note_en", widget: "text"}
+          - {label: "Shënimi i çmimeve orientuese SQ", name: "market_note_sq", widget: "text"}
+          - {label: "WhatsApp (vetëm shifrat me 355)", name: "whatsapp_number", widget: "string", hint: "Shembull: 355685348508"}
+          - {label: "Numri që shfaqet në website", name: "phone_display", widget: "string"}
+          - {label: "Email (opsional)", name: "contact_email", widget: "string", required: false}
+          - {label: "Vendndodhja", name: "contact_location", widget: "string"}
+
+  - name: "gallery"
+    label: "02 · Fotografitë / Galeria"
+    files:
+      - name: "gallery"
+        label: "Fotografitë dhe renditja"
+        file: "content/gallery.json"
+        format: "json"
+        fields:
+          - label: "Fotografitë"
+            name: "photos"
+            widget: "list"
+            summary: "{{fields.title_sq}}"
+            fields:
+              - {label: "Emri EN", name: "title_en", widget: "string"}
+              - {label: "Emri SQ", name: "title_sq", widget: "string"}
+              - {label: "Përshkrimi EN", name: "description_en", widget: "text", required: false}
+              - {label: "Përshkrimi SQ", name: "description_sq", widget: "text", required: false}
+              - {label: "Ngarko ose zëvendëso foton", name: "image", widget: "image", required: false}
+              - {label: "Adresa e fotos origjinale ekzistuese", name: "image_url", widget: "string", required: false, hint: "Përdoret nëse nuk është ngarkuar foto e re. Mos e ndrysho pa nevojë."}
+              - {label: "Shfaq te 3 fotot kryesore", name: "show_on_home", widget: "boolean", default: false}
+              - {label: "Autori dhe licenca (në fund të faqes)", name: "photo_credit", widget: "string", required: false}
+              - {label: "Lidhja e burimit/licencës", name: "credit_url", widget: "string", required: false}
+
   - name: "tour_packages"
-    label: "Paketat Turistike"
+    label: "03 · Paketat Turistike & Çmimet"
+    label_singular: "Paketë"
     folder: "content/packages"
     create: true
+    delete: true
     extension: "md"
     format: "frontmatter"
     slug: "{{slug}}"
+    summary: "{{title}} · {{price}}"
     fields:
-      - { label: "Emri i paketës", name: "title", widget: "string" }
-      - { label: "Përshkrimi", name: "body", widget: "markdown" }
-      - { label: "Fotografia", name: "image", widget: "image", required: false }
-      - { label: "Çmimi", name: "price", widget: "string", default: "On Request" }
+      - {label: "Emri i paketës EN", name: "title", widget: "string"}
+      - {label: "Emri i paketës SQ", name: "title_sq", widget: "string", required: false}
+      - {label: "Përshkrimi EN", name: "body", widget: "text"}
+      - {label: "Përshkrimi SQ", name: "description_sq", widget: "text", required: false}
+      - {label: "Çmimi (shkruaj p.sh. 35 € ose On Request)", name: "price", widget: "string", default: "On Request"}
+      - label: "Mënyra e çmimit"
+        name: "pricing_mode"
+        widget: "select"
+        default: "request"
+        options:
+          - {label: "Sipas kërkesës (On Request)", value: "request"}
+          - {label: "Çmim fiks i konfirmuar", value: "fixed"}
+      - {label: "Foto e paketës (ngarkim)", name: "image", widget: "image", required: false}
+      - {label: "Foto ekzistuese (URL)", name: "image_url", widget: "string", required: false}
+      - {label: "Paketa aktive", name: "active", widget: "boolean", default: true}
+
+  - name: "hospitality"
+    label: "04 · Akomodimi & Ushqimi"
+    files:
+      - name: "hospitality"
+        label: "Shërbimet e akomodimit dhe ushqimit"
+        file: "content/hospitality.json"
+        format: "json"
+        fields:
+          - label: "Ofertat"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title_sq}} · {{fields.price}}"
+            fields:
+              - {label: "Titulli EN", name: "title_en", widget: "string"}
+              - {label: "Titulli SQ", name: "title_sq", widget: "string"}
+              - {label: "Përshkrimi EN", name: "description_en", widget: "text"}
+              - {label: "Përshkrimi SQ", name: "description_sq", widget: "text"}
+              - {label: "Çmimi (ose On Request)", name: "price", widget: "string", default: "On Request"}
+              - {label: "Fotografia e ofertës", name: "image", widget: "image", required: false}
+              - {label: "URL e fotos ekzistuese", name: "image_url", widget: "string", required: false}
+              - {label: "Ikona (emoji)", name: "icon", widget: "string", required: false}
