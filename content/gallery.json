@@ -1,0 +1,64 @@
+{
+  "photos": [
+    {
+      "title_en": "Bënja Bridge & Thermal Baths",
+      "title_sq": "Ura e Bënjës & Banjat Termale",
+      "description_en": "The historic stone bridge beside the Lengarica River and thermal waters.",
+      "description_sq": "Ura historike prej guri në Lengaricë, pranë ujërave termale.",
+      "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Katiu%20Bridge%20-%20Benje%2C%20Permet%2C%20Albania.jpg",
+      "photo_credit": "Klejdi Shtrepi · CC BY-SA 4.0",
+      "credit_url": "https://commons.wikimedia.org/wiki/File:Katiu_Bridge_-_Benje,_Permet,_Albania.jpg",
+      "show_on_home": true
+    },
+    {
+      "title_en": "Rafting on the Vjosa",
+      "title_sq": "Rafting në Vjosë",
+      "description_en": "Real adventurers on the Vjosa River. Guided trips depend on river conditions.",
+      "description_sq": "Aventurierë realë në lumin Vjosa. Turet me guidë varen nga kushtet e lumit.",
+      "image_url": "https://images.unsplash.com/photo-1642933196504-62107dac9258?auto=format&fit=crop&w=1300&q=82",
+      "photo_credit": "Adventure Albania · Unsplash License",
+      "credit_url": "https://unsplash.com/photos/a-group-of-people-riding-on-the-back-of-a-raft-wSFub7VcwOc",
+      "show_on_home": true
+    },
+    {
+      "title_en": "Guri i Qytetit",
+      "title_sq": "Guri i Qytetit",
+      "description_en": "The iconic limestone landmark at the heart of Përmet.",
+      "description_sq": "Shkëmbi simbolik në zemër të Përmetit.",
+      "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/P%C3%ABrmet%20%E2%80%93%20Guri%20i%20Qytetit.jpg",
+      "photo_credit": "Albinfo · CC BY-SA 4.0",
+      "credit_url": "https://commons.wikimedia.org/wiki/File:Përmet_–_Guri_i_Qytetit.jpg",
+      "show_on_home": true
+    },
+    {
+      "title_en": "Hotova Fir Forest",
+      "title_sq": "Bredhi i Hotovës",
+      "description_en": "Mountain forests and authentic hiking landscapes.",
+      "description_sq": "Pyje malore dhe peizazhe autentike për ecje.",
+      "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bredhi%20I%20Hotov%C3%ABs.jpg",
+      "photo_credit": "Rexhino lahe · CC BY-SA 4.0",
+      "credit_url": "https://commons.wikimedia.org/wiki/File:Bredhi_I_Hotovës.jpg",
+      "show_on_home": false
+    },
+    {
+      "title_en": "Këlcyra Gorge",
+      "title_sq": "Gryka e Këlcyrës",
+      "description_en": "A wide view of the Vjosa valley and Këlcyra gorge.",
+      "description_sq": "Pamje e luginës së Vjosës dhe Grykës së Këlcyrës.",
+      "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gryka%20e%20k%C3%ABlcyr%C3%ABs.jpg",
+      "photo_credit": "Albinfo · Public Domain",
+      "credit_url": "https://commons.wikimedia.org/wiki/File:Gryka_e_këlcyrës.jpg",
+      "show_on_home": false
+    },
+    {
+      "title_en": "Lengarica Canyon",
+      "title_sq": "Kanioni i Lengaricës",
+      "description_en": "The dramatic rock formations and river canyon near Bënja.",
+      "description_sq": "Formacionet shkëmbore të kanionit pranë Bënjës.",
+      "image_url": "https://commons.wikimedia.org/wiki/Special:FilePath/L%C3%ABngarica%20-%20River%20and%20Canyon.jpg",
+      "photo_credit": "Malenki · CC BY 3.0",
+      "credit_url": "https://commons.wikimedia.org/wiki/File:Lëngarica_-_River_and_Canyon.jpg",
+      "show_on_home": false
+    }
+  ]
+}
