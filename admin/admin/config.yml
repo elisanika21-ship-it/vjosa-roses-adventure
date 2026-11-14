@@ -1,0 +1,22 @@
+
+backend:
+  name: github
+  repo: elisanika21-ship-it/vjosa-roses-adventure
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "tour_packages"
+    label: "Paketat Turistike"
+    folder: "content/packages"
+    create: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Emri i paketës", name: "title", widget: "string" }
+      - { label: "Përshkrimi", name: "body", widget: "markdown" }
+      - { label: "Fotografia", name: "image", widget: "image", required: false }
+      - { label: "Çmimi", name: "price", widget: "string", default: "On Request" }
