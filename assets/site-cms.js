@@ -82,6 +82,11 @@
     translated($(".hero h1"), data.hero_title_en || "Vjosa Roses Adventure", data.hero_title_sq || data.hero_title_en);
     translated($(".hero .eyebrow"), data.hero_eyebrow_en || "EXPLORE PËRMET", data.hero_eyebrow_sq);
     translated($(".hero-content p"), data.hero_subtitle_en || "Nature · Adventure · Culture · Wellness", data.hero_subtitle_sq);
+    translated($("#adventures .intro"), data.adventures_intro_en, data.adventures_intro_sq);
+    translated($("#packages .intro"), data.packages_intro_en, data.packages_intro_sq);
+    translated($("#hospitality .intro"), data.hospitality_intro_en, data.hospitality_intro_sq);
+    translated($("#discover h2"), data.discover_title_en, data.discover_title_sq);
+    translated($("#discover p"), data.discover_intro_en, data.discover_intro_sq);
     translated($("#about p"), data.about_en, data.about_sq);
     translated($("#contact p"), data.contact_intro_en, data.contact_intro_sq);
     const priceNote = $(".price-guide");
@@ -96,6 +101,15 @@
       more.target = "_blank"; more.rel = "noopener noreferrer";
       translated(more, "Example public rafting price ↗", "Shembull i çmimit publik të rafting-ut ↗");
       priceNote.appendChild(more);
+    }
+    const contact = $("#contact");
+    if (contact) {
+      let emailLink = $("#business-email", contact);
+      const email = plain(data.contact_email);
+      if (email && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        if (!emailLink) { emailLink = document.createElement("a"); emailLink.id="business-email"; emailLink.className="contact-email"; contact.appendChild(emailLink); }
+        emailLink.href = "mailto:" + email; emailLink.textContent = email;
+      } else if (emailLink) emailLink.remove();
     }
     const footerPlace = $("footer");
     if (footerPlace && data.contact_location) footerPlace.title = plain(data.contact_location);
@@ -172,16 +186,28 @@
     const found = md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
     if (!found) return null;
     const data = {};
-    found[1].split("\n").forEach(line => {
+    const lines = found[1].split("\n");
+    let activeKey = null;
+    let folded = false;
+    for (const line of lines) {
       const m = line.match(/^([a-zA-Z0-9_]+):\s*(.*)$/);
-      if (!m) return;
-      let val = m[2].trim();
-      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) val = val.slice(1, -1);
-      data[m[1]] = val;
-    });
+      if (m) {
+        const key = m[1]; let val = m[2].trim();
+        folded = /^[|>][-+0-9]*$/.test(val);
+        activeKey = folded ? key : null;
+        if (folded) { data[key] = ""; continue; }
+        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) val = val.slice(1, -1);
+        data[key] = val;
+      } else if (activeKey && /^\s+/.test(line)) {
+        data[activeKey] += (data[activeKey] ? (folded ? " " : "\n") : "") + line.trim();
+      } else {
+        activeKey = null;
+      }
+    }
     data.body = md.slice(found[0].length).trim();
     return data;
   }
+
   function packageCard(data) {
     const card = document.createElement("article"); card.className = "card";
     const inner = document.createElement("div");
