@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "title_en": "Accommodation in Përmet",
+      "title_sq": "Akomodim në Përmet",
+      "description_en": "Guesthouses and hotels based on your dates, group size and preferences. Confirm availability with our team.",
+      "description_sq": "Bujtina dhe hotele sipas datave, personave dhe preferencave. Konfirmoni disponueshmërinë me ekipin.",
+      "price": "On Request",
+      "image": "",
+      "image_url": "",
+      "icon": "🛏️"
+    },
+    {
+      "title_en": "Traditional Food Experience",
+      "title_sq": "Eksperiencë me Ushqim Tradicional",
+      "description_en": "Local dishes and dining options, with menus and dietary needs discussed before booking.",
+      "description_sq": "Gatime dhe restorante vendase; menutë dhe nevojat ushqimore diskutohen para rezervimit.",
+      "price": "On Request",
+      "image": "",
+      "image_url": "",
+      "icon": "🍲"
+    }
+  ]
+}
