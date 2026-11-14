@@ -28,6 +28,16 @@ collections:
           - {label: "Teksti mbi titullin SQ", name: "hero_eyebrow_sq", widget: "string"}
           - {label: "Slogani EN", name: "hero_subtitle_en", widget: "string"}
           - {label: "Slogani SQ", name: "hero_subtitle_sq", widget: "string"}
+          - {label: "Përshkrimi i aventurave EN", name: "adventures_intro_en", widget: "text"}
+          - {label: "Përshkrimi i aventurave SQ", name: "adventures_intro_sq", widget: "text"}
+          - {label: "Hyrje për paketat EN", name: "packages_intro_en", widget: "text"}
+          - {label: "Hyrje për paketat SQ", name: "packages_intro_sq", widget: "text"}
+          - {label: "Hyrje akomodim dhe ushqim EN", name: "hospitality_intro_en", widget: "text"}
+          - {label: "Hyrje akomodim dhe ushqim SQ", name: "hospitality_intro_sq", widget: "text"}
+          - {label: "Titulli Zbulo Përmetin EN", name: "discover_title_en", widget: "string"}
+          - {label: "Titulli Zbulo Përmetin SQ", name: "discover_title_sq", widget: "string"}
+          - {label: "Teksti Zbulo Përmetin EN", name: "discover_intro_en", widget: "text"}
+          - {label: "Teksti Zbulo Përmetin SQ", name: "discover_intro_sq", widget: "text"}
           - {label: "Rreth nesh EN", name: "about_en", widget: "text"}
           - {label: "Rreth nesh SQ", name: "about_sq", widget: "text"}
           - {label: "Kontakti EN", name: "contact_intro_en", widget: "text"}
