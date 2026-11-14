@@ -106,7 +106,7 @@
     if (contact) {
       let emailLink = $("#business-email", contact);
       const email = plain(data.contact_email);
-      if (email && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+      if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         if (!emailLink) { emailLink = document.createElement("a"); emailLink.id="business-email"; emailLink.className="contact-email"; contact.appendChild(emailLink); }
         emailLink.href = "mailto:" + email; emailLink.textContent = email;
       } else if (emailLink) emailLink.remove();
