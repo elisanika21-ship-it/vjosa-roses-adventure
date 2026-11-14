@@ -112,7 +112,12 @@
       } else if (emailLink) emailLink.remove();
     }
     const footerPlace = $("footer");
-    if (footerPlace && data.contact_location) footerPlace.title = plain(data.contact_location);
+    if (footerPlace) {
+      footerPlace.title = plain(data.contact_location);
+      const last = footerPlace.lastChild;
+      if (last && last.nodeType === 3) last.textContent = " " + (plain(data.business_name) || "Vjosa Roses Adventure") + " · " + (plain(data.contact_location) || "Përmet, Albania");
+    }
+    if (data.business_name) document.title = plain(data.business_name) + " | Explore Përmet";
     refreshBookings();
   }
 
