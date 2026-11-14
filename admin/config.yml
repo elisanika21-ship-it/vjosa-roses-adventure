@@ -1,8 +1,12 @@
 
+
 backend:
   name: github
   repo: elisanika21-ship-it/vjosa-roses-adventure
   branch: main
+  base_url: https://vjosa-roses-auth.elisanika21.workers.dev
+  auth_endpoint: /auth
+
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
