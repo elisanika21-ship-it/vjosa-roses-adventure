@@ -187,14 +187,14 @@ main{max-width:1500px;padding:clamp(20px,4vw,48px);margin:auto}
    </div>
    <div class="editor-workspace">
     <div class="editor-toolbar">
-     <div><h3 id="editorSectionLabel">Përmbajtja</h3><p>Butoni publikon formularin që ke hapur, jo një fushë të vetme.</p></div>
+     <div><h3 id="editorSectionLabel">Përmbajtja</h3><p>Publikimi bëhet për të gjithë formularin me butonin zyrtar të Decap.</p></div>
      <div class="editor-tools">
       <a class="dashboard-edit-link" id="editorExternalLink" href="editor.html" target="_blank" rel="noopener noreferrer">Hap veçmas ↗</a>
-      <button class="dashboard-publish" type="button" id="dashboardPublish">Ruaj / Publiko</button>
+      <button class="dashboard-publish" type="button" id="dashboardPublish">Publiko ndryshimet</button>
      </div>
     </div>
     <div id="editorAlert" class="editor-alert" hidden role="status"></div>
-    <div class="callout" style="margin:10px 15px 15px">Për të ruajtur: identifikohu në GitHub kur të kërkohet, bëj ndryshimin, dhe kliko <strong>Ruaj / Publiko</strong>. Nëse ky buton nuk aktivizon ruajtjen, përdor <strong>Publish</strong> brenda redaktorit më poshtë ose <strong>Hap veçmas</strong>. Mos e mbyll formularin para konfirmimit.</div>
+    <div class="callout" style="margin:10px 15px 15px">Për të ruajtur: bëj ndryshimin dhe kliko <strong>Publiko ndryshimet</strong>. Nëse Decap nuk e ka aktivizuar ende butonin Publish, do të hapet redaktori i plotë. Konfirmo <strong>Publish now</strong> vetëm kur Decap ta kërkon.</div>
     <iframe id="dashboardEditorFrame" class="editor-frame" title="Redaktori i përmbajtjes Vjosa Roses Adventure" loading="lazy" allow="clipboard-write"></iframe>
    </div>
   </section>
@@ -268,22 +268,34 @@ main{max-width:1500px;padding:clamp(20px,4vw,48px);margin:auto}
  });
  document.getElementById("dashboardPublish").addEventListener("click",()=>{
    const key=location.hash.slice(1);
-   if(!Object.prototype.hasOwnProperty.call(destinations,key)){alertEditor("Zgjidh fillimisht një seksion për redaktim.");return;}
+   const dest=destinations[key];
+   if(!dest){alertEditor("Zgjidh seksionin që dëshiron të ndryshosh.");return;}
+   // Look for Decap's actual save action. Avoid any fake helper buttons and
+   // never claim a save has succeeded without Decap confirmation.
+   let found=false;
    try{
-     const doc=frame.contentWindow.document;
-     const buttons=[...doc.querySelectorAll("button")].filter(b=>b.getClientRects().length&&!b.disabled);
-     // Trigger the editor's existing shortcut if available. It delegates to Decap's own action.
-     const shortcut=buttons.find(b=>b.classList.contains("vra-publish-float"));
-     const native=buttons.find(b=>/^(Publish|Save|Publiko|Save changes)$/i.test((b.textContent||"").trim()));
-     const action=shortcut||native;
-     if(!action){
-       alertEditor("Hap fushat dhe ndrysho të paktën një vlerë. Nëse nuk je identifikuar, kliko “Hap veçmas” dhe hyr në GitHub. Pastaj shtyp Publish te Decap.");
-       return;
+     const doc=frame.contentDocument;
+     const items=[...doc.querySelectorAll("button,[role='button']")].filter(el=>
+       !el.disabled && el.getClientRects().length &&
+       !el.closest(".helper") &&
+       !el.matches(".vra-publish-helper")
+     );
+     const action=items.find(el=>{
+       const label=[el.textContent,el.getAttribute("title"),el.getAttribute("aria-label")].filter(Boolean).join(" ").replace(/\s+/g," ").trim();
+       return /\b(publish|save|publiko|ruaj)\b/i.test(label) && !/delete|remove|discard/i.test(label);
+     });
+     if(action){
+       action.scrollIntoView({behavior:"smooth",block:"center"});
+       action.focus({preventScroll:true});
+       action.click();
+       alertEditor("Hapi i publikimit u hap në redaktor. Nëse shfaqet 'Publish now', konfirmoje atje. Vetëm Decap mund të konfirmojë nëse u ruajt.");
+       found=true;
      }
-     action.click();
-     alertEditor("U aktivizua veprimi i Decap. Nëse shfaqet Publish now, konfirmoje aty. Kontrollo njoftimin për ruajtjen.");
-   }catch(e){
-     alertEditor("Identifikohu në redaktor nëse kërkohet, ose zgjidh “Hap veçmas” për të publikuar në Decap.");
+   }catch(e){}
+   if(!found){
+     alertEditor("Decap nuk po shfaq butonin e tij origjinal të publikimit në këtë pamje. Hape redaktorin e plotë nga 'Hap veçmas'; ndrysho një fushë dhe përdor butonin Publish të Decap.");
+     const link=document.getElementById("editorExternalLink");
+     link.focus();
    }
  });
  addEventListener("hashchange",show);show();
