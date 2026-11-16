@@ -1,66 +1,199 @@
 <!doctype html>
 <html lang="sq">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b4030"><meta name="robots" content="noindex,nofollow">
-<title>Paneli i Administrimit | Vjosa Roses Adventure</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0b4030">
+<title>Dashboard | Vjosa Roses Adventure</title>
 <style>
-:root{--pine:#0b4030;--pine2:#165c48;--gold:#d0a454;--cream:#faf8f2;--muted:#6b7a72}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#163e2f;background:var(--cream);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
-a{text-decoration:none;color:inherit}button{font:inherit}header{background:linear-gradient(125deg,#0b4030,#17614c 75%,#1d7866);color:white;padding:25px clamp(20px,5vw,80px) 38px}
-.top{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;max-width:1240px;margin:auto}.brand{display:flex;align-items:center;gap:14px;font-size:17px;font-weight:750;letter-spacing:.2px}.brand img{width:56px;height:56px;object-fit:contain;background:#fffdf9;border-radius:13px;padding:4px}
-.top-actions{display:flex;gap:8px;flex-wrap:wrap}.top-actions a{border:1px solid #ffffff70;padding:10px 15px;border-radius:22px;font-size:13px;color:white}
-.hero{max-width:1240px;margin:45px auto 0}.eyebrow{color:#eacb8d;font-size:12px;font-weight:750;letter-spacing:1.7px}.hero h1{font:normal clamp(34px,5vw,58px) Georgia,serif;margin:13px 0 14px}.hero p{max-width:690px;color:#e1eae4;font-size:16px;line-height:1.7;margin:0}
-main{max-width:1240px;margin:-18px auto 0;padding:0 clamp(18px,3vw,40px) 60px;position:relative}
-.quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
-.tile{display:flex;flex-direction:column;gap:11px;padding:23px;background:white;border-radius:17px;border:1px solid #e8e6db;box-shadow:0 9px 24px #0c38200d;min-height:218px;transition:transform .15s,box-shadow .15s}
-.tile:hover,.tile:focus-visible{transform:translateY(-3px);box-shadow:0 12px 30px #0c38201c;outline-color:#bfa057}.tile .symbol{display:inline-flex;width:46px;height:46px;align-items:center;justify-content:center;background:#eef4ec;font-size:25px;border-radius:13px}
-.tile h2{font-size:19px;margin:1px 0 0;color:var(--pine)}.tile p{font-size:13px;line-height:1.65;color:#62736a;margin:0;flex:1}.go{color:#9c7224;font-size:13px;font-weight:750}
-.under{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.8fr);gap:19px;margin-top:26px}
-.panel{padding:25px;background:#fff;border:1px solid #e6e5db;border-radius:17px}.panel h3{margin:0 0 14px;font-size:19px}.steps{list-style:none;padding:0;margin:0;display:grid;gap:12px}.steps li{display:flex;gap:12px;align-items:flex-start;color:#55695e;font-size:14px;line-height:1.55}.stepno{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:50%;background:#e5eee4;color:#16523e;font-weight:800;font-size:12px}
-.hint{font-size:13px;color:#5c7164;line-height:1.7}.notice{display:flex;gap:10px;padding:15px;border-radius:12px;background:#f2f4e9;color:#58683c;font-size:13px;line-height:1.55}.notice span{font-size:18px}.pill{display:inline-block;padding:7px 12px;border-radius:25px;background:#e4efea;color:#175743;font-size:12px;font-weight:750;margin-bottom:12px}
-footer{text-align:center;font-size:12px;color:#758078;padding:20px}footer a{text-decoration:underline}
-@media(max-width:950px){.quick{grid-template-columns:repeat(2,minmax(0,1fr))}.under{grid-template-columns:1fr}}@media(max-width:560px){header{padding:18px 20px 40px}.hero{margin-top:36px}.quick{grid-template-columns:1fr;gap:12px}.tile{min-height:160px;padding:20px}.brand{font-size:15px}.hero p{font-size:14px}.under{gap:14px}.panel{padding:19px}}
-</style></head>
+:root{--pine:#103d2f;--pine2:#1d5945;--ink:#203a32;--gold:#c79b4e;--cream:#f6f6f1;--line:#e5e9e0;--muted:#708078;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:14px/1.6 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;flex:0 0 260px;background:linear-gradient(178deg,#0b392b,#164c3d);color:#e7f2e8;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:50}
+.identity{padding:25px 22px 21px;display:flex;gap:12px;align-items:center;border-bottom:1px solid #ffffff1d}
+.identity img{width:54px;height:54px;object-fit:contain;background:#fffcf3;border-radius:13px;padding:5px}
+.identity strong{display:block;font-size:15px;color:white;line-height:1.3}.identity small{display:block;color:#b6ccbf;letter-spacing:.3px;font-size:11px;margin-top:6px}
+.menu-heading{font-size:10px;font-weight:800;letter-spacing:1.8px;color:#92b2a3;text-transform:uppercase;margin:24px 23px 9px}
+.sidenav{display:flex;flex-direction:column;gap:4px;padding:0 10px}
+.nav-item{display:flex;align-items:center;gap:12px;border-radius:11px;padding:13px 14px;color:#d9e7de;font-size:13px;font-weight:600;min-height:46px;transition:.15s}
+.nav-item .navicon{width:24px;text-align:center;font-size:18px}
+.nav-item:hover,.nav-item:focus-visible,.nav-item.active{background:#ffffff19;color:#fff;outline-color:#eacb96}
+.nav-item.active{box-shadow:inset 3px 0 var(--gold)}
+.nav-item external{margin-left:auto}
+.sidebar-bottom{margin-top:auto;padding:22px 17px;border-top:1px solid #ffffff1d}
+.sidebar-bottom a{display:block;font-size:12px;color:#e6c78b;padding:7px 5px}
+.sidebar-bottom p{color:#9cbaab;font-size:11px;margin:10px 5px 0}
+.main{flex:1;min-width:0}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;background:#fff;border-bottom:1px solid var(--line);padding:15px clamp(18px,4vw,48px);min-height:76px}
+.topbar h1{font-size:16px;margin:0;font-weight:800;letter-spacing:.15px}.topbar p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.toplinks{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.small-btn{border:1px solid #d4dfd5;background:white;border-radius:24px;padding:9px 15px;font-size:12px;font-weight:700;white-space:nowrap}
+.small-btn.primary{background:var(--pine);color:#fff;border-color:var(--pine)}
+#menuButton{display:none;background:#eff3ed;border:0;padding:8px 10px;border-radius:8px;font-size:20px}
+main{max-width:1500px;padding:clamp(20px,4vw,48px);margin:auto}
+.view[hidden]{display:none}
+.page-intro{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin-bottom:23px;flex-wrap:wrap}
+.overline{font-size:11px;font-weight:800;color:#a17d3c;letter-spacing:1.6px;text-transform:uppercase}
+.page-intro h2{font:normal clamp(30px,4vw,44px) Georgia,serif;color:var(--pine);margin:6px 0 5px}
+.page-intro p{margin:0;color:#65776d;max-width:760px;line-height:1.75}
+.status{display:inline-flex;align-items:center;gap:8px;border-radius:28px;padding:8px 14px;background:#eaf2e9;color:#305945;font-size:12px;font-weight:700}
+.status.warn{background:#fff3dc;color:#8e6626}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.metric{padding:20px 22px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 25px #15382707}
+.metric .label{color:var(--muted);font-size:12px;display:block}.metric strong{display:block;font-size:30px;line-height:1.5;margin-top:5px;color:var(--pine);font-weight:750}.metric .hint{display:block;color:#8b9890;font-size:11px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 6px 24px #15382706}
+.panels{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:19px;margin-top:19px}
+.panel h3{font-size:18px;color:var(--pine);margin:0 0 9px}.panel p{color:#64746b;margin:3px 0 14px;line-height:1.75}.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.action{padding:18px 17px;background:#f8faf7;border:1px solid #e7eee5;border-radius:13px;display:flex;flex-direction:column;gap:5px}
+.action:hover{border-color:#9ebcac;background:#f1f7f0}.action b{font-size:14px}.action span{font-size:12px;color:#667a6c}
+.timeline{list-style:none;padding:0;margin:12px 0 0}.timeline li{display:flex;align-items:flex-start;gap:13px;margin:0;padding:0 0 17px;position:relative}.timeline li:not(:last-child):before{content:"";position:absolute;top:26px;left:13px;width:1px;height:calc(100% - 26px);background:#d3e1d6}.num{flex:0 0 27px;height:27px;border-radius:50%;background:#eaf2e7;color:#1b6147;display:grid;place-items:center;font-size:12px;font-weight:900}.timeline b{display:block;font-size:13px}.timeline span{display:block;color:#6e7d74;font-size:12px}
+.insight-stages{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stage{border:1px solid #e2e9e0;border-radius:14px;padding:18px;background:#fafff9}.stage i{font-style:normal;font-size:21px}.stage b{display:block;font-size:13px;margin:7px 0 0}.stage strong{display:block;font-size:28px;color:var(--pine);margin:7px 0}.stage small{color:#7e8d82}
+.callout{border:1px solid #efe0ba;border-radius:13px;background:#fffbf0;padding:17px 19px;color:#655534;font-size:13px;line-height:1.75}
+.code{font-family:ui-monospace,monospace;background:#eaf0e8;border-radius:5px;padding:2px 5px}
+.setup{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}.setup div{padding:17px;border:1px solid #e4e9df;background:#fbfcf9;border-radius:13px}.setup b{display:block;color:var(--pine)}.setup p{font-size:13px}
+.list{display:grid;gap:10px}.list a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:13px;font-weight:650}.list a:last-child{border-bottom:0}.list a span{color:#a1793a}
+.footer{padding:20px 45px 35px;color:#9aa49a;font-size:11px;text-align:center}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.panels{grid-template-columns:1fr}.insight-stages{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:780px){.sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-102%);transition:transform .2s;box-shadow:10px 0 30px #081c1844}.sidebar.open{transform:translateX(0)}#menuButton{display:inline-block}.grid{grid-template-columns:1fr 1fr}.topbar{padding:13px 16px}.toplinks .small-btn:not(.primary){display:none}.footer{padding:15px}}
+@media(max-width:540px){.grid{grid-template-columns:1fr 1fr;gap:10px}.metric{padding:14px}.metric strong{font-size:24px}.actions,.setup{grid-template-columns:1fr}.insight-stages{grid-template-columns:1fr}.panel{padding:18px}.page-intro h2{font-size:31px}.topbar p{display:none}}
+</style>
+</head>
 <body>
-<header>
- <div class="top">
-  <div class="brand"><img src="../assets/logo.webp" alt="Logo Vjosa Roses Adventure"><span>Vjosa Roses Adventure<br><small style="font-weight:450;font-size:12px;opacity:.8">Paneli i Administrimit</small></span></div>
-  <div class="top-actions"><a href="../" target="_blank" rel="noopener noreferrer">Shiko website-in ↗</a><a href="editor.html">Hap redaktorin</a></div>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+ <div class="identity"><img src="../assets/logo.webp" alt="Vjosa Roses Adventure"><div><strong>Vjosa Roses<br>Adventure</strong><small>BUSINESS DASHBOARD</small></div></div>
+ <div class="menu-heading">Kryesore</div>
+ <nav class="sidenav" aria-label="Menaxhimi">
+  <a class="nav-item active" href="#home" data-view="home"><span class="navicon">⌂</span> Home Page</a>
+  <a class="nav-item" href="#insights" data-view="insights"><span class="navicon">◫</span> Insights · Statistikat</a>
+  <a class="nav-item" href="editor.html#/collections/site_settings/entries/settings"><span class="navicon">✎</span> Tekstet e Website-it</a>
+  <a class="nav-item" href="editor.html#/collections/gallery/entries/gallery"><span class="navicon">▣</span> Fotografitë & Galeria</a>
+ </nav>
+ <div class="menu-heading">Menaxhimi i ofertave</div>
+ <nav class="sidenav">
+  <a class="nav-item" href="editor.html#/collections/tour_packages"><span class="navicon">♧</span> Paketat Turistike</a>
+  <a class="nav-item" href="editor.html#/collections/tour_packages"><span class="navicon">€</span> Çmimet</a>
+  <a class="nav-item" href="editor.html#/collections/hospitality/entries/hospitality"><span class="navicon">☷</span> Akomodimi & Ushqimi</a>
+ </nav>
+ <div class="menu-heading">Cilësimet</div>
+ <nav class="sidenav">
+  <a class="nav-item" href="editor.html#/collections/site_settings/entries/settings"><span class="navicon">⚙</span> Logoja & Kontaktet</a>
+  <a class="nav-item" href="editor.html#/collections/site_settings/entries/settings"><span class="navicon">◎</span> Integrimet</a>
+ </nav>
+ <div class="sidebar-bottom">
+  <a href="../" target="_blank" rel="noopener noreferrer">↗ Shiko Website-in Publik</a>
+  <a href="editor.html">↗ Hap Redaktorin e Plotë</a>
+  <p>Vjosa Roses Adventure · Përmet, Albania</p>
  </div>
- <div class="hero">
-  <div class="eyebrow">MIRË SE ERDHE 🌹</div>
-  <h1>Menaxho faqen me lehtësi.</h1>
-  <p>Ndrysho fotografitë, paketat, çmimet, tekstet, akomodimin dhe kontaktet nga një vend i vetëm. Zgjidh seksionin më poshtë për të hapur redaktorin.</p>
+</aside>
+<div class="main">
+ <div class="topbar">
+  <div style="display:flex;align-items:center;gap:12px">
+   <button type="button" id="menuButton" aria-label="Hap menunë" aria-controls="sidebar" aria-expanded="false">☰</button>
+   <div><h1>Vjosa Roses Adventure</h1><p id="locationLabel">Administrimi i website-it · Përmet</p></div>
+  </div>
+  <div class="toplinks"><a href="../" class="small-btn" target="_blank" rel="noopener noreferrer">Shiko faqen ↗</a><a href="editor.html" class="small-btn primary">✎ Redakto</a></div>
  </div>
-</header>
-<main>
- <section class="quick" aria-label="Seksionet e administrimit">
-  <a class="tile" href="editor.html#/collections/gallery/entries/gallery"><span class="symbol">🖼️</span><h2>Fotografitë & Galeria</h2><p>Ndrysho fotografitë, renditjen dhe përshkrimet. Emrat e autorëve mbeten vetëm te kreditet e licencave.</p><span class="go">Menaxho fotografitë →</span></a>
-  <a class="tile" href="editor.html#/collections/tour_packages"><span class="symbol">🏞️</span><h2>Paketat Turistike</h2><p>Shto, edito, publiko dhe hiq paketa. Plotëso përshkrimet në shqip dhe anglisht.</p><span class="go">Menaxho paketat →</span></a>
-  <a class="tile" href="editor.html#/collections/tour_packages"><span class="symbol">💶</span><h2>Çmimet</h2><p>Zgjidh paketën dhe ndrysho çmimin. Mund të përdorësh edhe “On Request”.</p><span class="go">Ndrysho çmimet →</span></a>
-  <a class="tile" href="editor.html#/collections/site_settings/entries/settings"><span class="symbol">✍️</span><h2>Tekstet e faqes</h2><p>Redakto titujt, përshkrimet, përmbajtjen e faqes kryesore dhe të dyja gjuhët.</p><span class="go">Ndrysho tekstet →</span></a>
-  <a class="tile" href="editor.html#/collections/hospitality/entries/hospitality"><span class="symbol">🛏️</span><h2>Akomodimi & Ushqimi</h2><p>Menaxho shërbimet, ofertat, çmimet dhe fotot për bujtinat dhe gastronominë.</p><span class="go">Menaxho shërbimet →</span></a>
-  <a class="tile" href="editor.html#/collections/site_settings/entries/settings"><span class="symbol">🌹</span><h2>Logoja & Kontaktet</h2><p>Përditëso logon, foton kryesore, WhatsApp-in, emailin dhe të dhënat e biznesit.</p><span class="go">Hap cilësimet →</span></a>
- </section>
- <div class="under">
-  <section class="panel">
-   <h3>Si bëhet një ndryshim?</h3>
-   <ol class="steps">
-    <li><span class="stepno">1</span><span>Zgjidh seksionin që dëshiron të ndryshosh nga kutitë sipër.</span></li>
-    <li><span class="stepno">2</span><span>Nëse të kërkohet, identifikohu te GitHub me llogarinë e autorizuar.</span></li>
-    <li><span class="stepno">3</span><span>Redakto tekstin, fotografinë ose çmimin; pastaj zgjidh <strong>Publish / Publiko</strong>.</span></li>
-    <li><span class="stepno">4</span><span>Hap website-in publik dhe rifreskoje për të parë ndryshimin.</span></li>
-   </ol>
+ <main>
+  <section class="view" id="home-view">
+   <div class="page-intro"><div><div class="overline">Paneli kryesor · Home Page</div><h2>Mirë se erdhe 🌹</h2><p>Gjithçka për website-in tënd në një vend. Menyja majtas të çon drejtpërdrejt te seksioni që dëshiron të ndryshosh.</p></div><span class="status">✓ Projekti i lidhur me GitHub</span></div>
+   <div class="grid">
+    <div class="metric"><span class="label">Paketat turistike në përmbajtje</span><strong id="packageCount">—</strong><span class="hint">Të dhëna të publikuara, jo statistika vizitorësh</span></div>
+    <div class="metric"><span class="label">Fotografitë në galeri</span><strong id="photoCount">—</strong><span class="hint">Numri i fotove të menaxhueshme</span></div>
+    <div class="metric"><span class="label">Vizitorët e website-it</span><strong>—</strong><span class="hint">Lidh Google Analytics te Insights</span></div>
+   </div>
+   <div class="panels">
+    <div class="panel"><h3>Menaxho Home Page</h3><p>Hap seksionin që do të përditësosh. Ndryshimet në përmbajtje ruhen nga Decap CMS, ndërsa pamja e faqes mbetet e njëjtë.</p>
+     <div class="actions">
+      <a class="action" href="editor.html#/collections/site_settings/entries/settings"><b>✎ Titujt dhe tekstet</b><span>Kreu, përshkrimet, dy gjuhët →</span></a>
+      <a class="action" href="editor.html#/collections/gallery/entries/gallery"><b>▣ Fotografitë</b><span>Galeri dhe foto kryesore →</span></a>
+      <a class="action" href="editor.html#/collections/tour_packages"><b>♧ Paketat & Çmimet</b><span>Ofertat dhe çmimet aktuale →</span></a>
+      <a class="action" href="editor.html#/collections/hospitality/entries/hospitality"><b>☷ Akomodimi & Ushqimi</b><span>Ofertat e shërbimeve →</span></a>
+      <a class="action" href="editor.html#/collections/site_settings/entries/settings"><b>⚙ Logoja & WhatsApp</b><span>Identiteti dhe kontaktet →</span></a>
+      <a class="action" href="#insights" data-view="insights"><b>◫ Insights</b><span>Vizitat dhe interesi për paketat →</span></a>
+     </div>
+    </div>
+    <div class="panel"><h3>Si publikohen ndryshimet?</h3><ol class="timeline">
+      <li><div class="num">1</div><div><b>Zgjidh një seksion</b><span>Për shembull, Fotografitë ose Paketat.</span></div></li>
+      <li><div class="num">2</div><div><b>Hap redaktorin</b><span>Identifikohu në GitHub nëse të kërkohet.</span></div></li>
+      <li><div class="num">3</div><div><b>Ndrysho dhe publiko</b><span>Kliko Publish; Cloudflare publikon nga GitHub.</span></div></li>
+      <li><div class="num">4</div><div><b>Shiko rezultatin</b><span>Rifresko website-in publik.</span></div></li>
+     </ol>
+     <a class="small-btn primary" style="display:inline-block;margin-top:16px" href="../" target="_blank" rel="noopener noreferrer">Hap faqen publike ↗</a>
+    </div>
+   </div>
   </section>
-  <section class="panel">
-   <span class="pill">Lidhja aktuale është e sigurt</span>
-   <h3>Hyrja në panel</h3>
-   <p class="hint">Paneli mund të hapet nga telefoni, tableti ose kompjuteri, kudo që ke internet. Redaktimi i përmbajtjes vazhdon të kërkojë identifikimin ekzistues në GitHub; kjo faqe hyrëse nuk kërkon dhe nuk ruan fjalëkalime.</p>
-   <div class="notice"><span>🔒</span><div><strong>Për sigurinë:</strong> Mos dërgo kurrë fjalëkalime në mesazhe. Hyrja e veçantë me email dhe fjalëkalim kërkon një shërbim identiteti të konfiguruar në mënyrë të sigurt.</div></div>
+  <section class="view" id="insights-view" hidden>
+   <div class="page-intro"><div><div class="overline">Analitika · Përvoja e vizitorit</div><h2>Insights të Website-it</h2><p>Shiko sa vizitorë vijnë, çfarë paketash eksplorojnë dhe sa klikojnë për rezervim. Matja përgatitet me Google Analytics 4.</p></div><span id="insightsStatus" class="status warn">○ Analitika nuk është lidhur ende</span></div>
+   <div class="grid">
+    <div class="metric"><span class="label">Vizitorë unikë</span><strong>—</strong><span class="hint">Do të shfaqen në raportin e Analytics</span></div>
+    <div class="metric"><span class="label">Shikime të faqeve</span><strong>—</strong><span class="hint">Matja e vizitave nga Google Analytics</span></div>
+    <div class="metric"><span class="label">Klikime WhatsApp</span><strong>—</strong><span class="hint">Veprimi për të kërkuar rezervim</span></div>
+   </div>
+   <div class="panel" style="margin-top:20px">
+    <h3>Rruga e vizitorit drejt rezervimit</h3>
+    <p>Këto janë fazat që website-i është përgatitur të masë. Numrat realë gjenden te raportet e Analytics pasi të aktivizohet lidhja; nuk tregojmë të dhëna të sajuara.</p>
+    <div class="insight-stages">
+     <div class="stage"><i>🏠</i><b>1 · Hyrja në faqe</b><strong>—</strong><small>Vizitorë / page_view</small></div>
+     <div class="stage"><i>🧭</i><b>2 · Shikon paketat</b><strong>—</strong><small>view_section · packages</small></div>
+     <div class="stage"><i>🎒</i><b>3 · Interesohet për paketë</b><strong>—</strong><small>funnel_package_view</small></div>
+     <div class="stage"><i>💬</i><b>4 · Klikon WhatsApp</b><strong>—</strong><small>funnel_whatsapp_click</small></div>
+    </div>
+   </div>
+   <div class="panels">
+    <div class="panel">
+     <h3>Aktivizo statistikat reale</h3>
+     <p id="analyticsSetupText">Për të marrë statistika reale, duhet një Google Analytics 4 Measurement ID. Deri atëherë faqja funksionon normalisht, por nuk mbledh të dhëna analitike nga ky integrim.</p>
+     <div class="setup">
+      <div><b>1 · Krijo Analytics falas</b><p>Hap Google Analytics dhe krijo një property për website-in e Vjosa Roses Adventure. Merr kodin që fillon me <span class="code">G-</span>.</p><a href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer" class="small-btn">Hap Google Analytics ↗</a></div>
+      <div><b>2 · Lidhe me website-in</b><p>Në Admin hap <strong>Tekstet, Logoja & Kontaktet</strong>. Gjej fushën “Google Analytics 4 – Measurement ID”, vendos kodin dhe publiko.</p><a href="editor.html#/collections/site_settings/entries/settings" class="small-btn">Hap cilësimet ↗</a></div>
+     </div>
+     <div class="callout"><strong>Privatësia:</strong> matja nis vetëm pasi të vendoset kodi i Analytics dhe vizitorët pranojnë statistikat. Nuk regjistrojmë emër, email apo numra telefoni. Statistikat nuk mund të rikrijohen për vizitat përpara aktivizimit.</div>
+    </div>
+    <div class="panel">
+     <h3>Raportet e vizitorëve</h3><p>Pasi të lidhësh Analytics, raportet e vërteta hapen përmes llogarisë tënde Google. Rruga e vizitorit mund të analizohet te “Explore → Funnel exploration”.</p>
+     <div class="list">
+      <a href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">Vizitorët dhe vizitat <span>↗</span></a>
+      <a href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">Faqet dhe përmbajtja më e parë <span>↗</span></a>
+      <a href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">Paketa më e shikuar <span>↗</span></a>
+      <a href="https://analytics.google.com/" target="_blank" rel="noopener noreferrer">Fazat e rezervimit / Funnels <span>↗</span></a>
+     </div>
+     <div style="margin-top:20px" class="callout">Për të shfaqur numra të gjallë brenda këtij paneli në vend të Google Analytics, duhet lidhje shtesë e sigurt me API-në e raporteve; kjo nuk është konfiguruar ende.</div>
+    </div>
+   </div>
   </section>
- </div>
-</main>
-<footer>© <span id="y"></span> Vjosa Roses Adventure · <a href="../">Faqja publike</a></footer>
-<script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+ </main>
+ <div class="footer">© <span id="year"></span> Vjosa Roses Adventure · Përmet, Albania · Website-i publik dhe paneli admin</div>
+</div>
+</div>
+<script>
+(()=>{"use strict";
+ const sidebar=document.getElementById("sidebar");
+ const menu=document.getElementById("menuButton");
+ menu.addEventListener("click",()=>{sidebar.classList.toggle("open");menu.setAttribute("aria-expanded",String(sidebar.classList.contains("open")))});
+ document.addEventListener("click",e=>{if(e.target.closest("a")){sidebar.classList.remove("open");menu.setAttribute("aria-expanded","false")}});
+ function show(){
+  const view=location.hash==="#insights"?"insights":"home";
+  document.querySelectorAll(".view").forEach(el=>el.hidden=el.id!==view+"-view");
+  document.querySelectorAll(".nav-item[data-view]").forEach(el=>{el.classList.toggle("active",el.dataset.view===view);if(el.dataset.view===view)el.setAttribute("aria-current","page");else el.removeAttribute("aria-current")});
+  document.title=(view==="insights"?"Insights":"Home Page")+" | Vjosa Roses Admin";
+ }
+ addEventListener("hashchange",show);show();
+ document.getElementById("year").textContent=new Date().getFullYear();
+ fetch("../content/gallery.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&Array.isArray(d.photos))document.getElementById("photoCount").textContent=d.photos.length}).catch(()=>{});
+ fetch("https://api.github.com/repos/elisanika21-ship-it/vjosa-roses-adventure/contents/content/packages",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(arr=>{if(Array.isArray(arr))document.getElementById("packageCount").textContent=arr.filter(x=>/\.md$/.test(x.name)).length}).catch(()=>{});
+ fetch("../content/site.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(d=>{
+  const id=String(d?.analytics_ga4_id||"").trim();
+  if(/^G-[A-Z0-9]{6,16}$/i.test(id)){
+   document.getElementById("insightsStatus").textContent="✓ Matja GA4 është konfiguruar";
+   document.getElementById("insightsStatus").classList.remove("warn");
+   document.getElementById("analyticsSetupText").textContent="Kodi GA4 është konfiguruar në website. Pas pranimit të vizitorëve, hap Google Analytics për numrat realë dhe raportet e rrugëtimit.";
+  }
+  const loc=document.getElementById("locationLabel");
+  if(d?.contact_location)loc.textContent="Administrimi i website-it · "+d.contact_location;
+ }).catch(()=>{});
+})();
+</script>
 </body></html>
