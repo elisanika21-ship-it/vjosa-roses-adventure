@@ -80,7 +80,8 @@ main{max-width:1500px;padding:clamp(20px,4vw,48px);margin:auto}
  <div class="identity"><img src="../assets/logo.webp" alt="Vjosa Roses Adventure"><div><strong>Vjosa Roses<br>Adventure</strong><small>BUSINESS DASHBOARD</small></div></div>
  <div class="menu-heading">Kryesore</div>
  <nav class="sidenav" aria-label="Menaxhimi">
-  <a class="nav-item active" href="#home" data-view="home"><span class="navicon">⌂</span> Home Page</a>
+  <a class="nav-item" href="#home" data-view="home"><span class="navicon">▦</span> Përmbledhja</a>
+  <a class="nav-item" href="#edit-settings" data-edit="edit-settings"><span class="navicon">⌂</span> Home Page · Redakto
   <a class="nav-item" href="#insights" data-view="insights"><span class="navicon">◫</span> Insights · Statistikat</a>
   <a class="nav-item" href="editor.html#/collections/site_settings/entries/settings"><span class="navicon">✎</span> Tekstet e Website-it</a>
   <a class="nav-item" href="editor.html#/collections/gallery/entries/gallery"><span class="navicon">▣</span> Fotografitë & Galeria</a>
@@ -193,6 +194,7 @@ main{max-width:1500px;padding:clamp(20px,4vw,48px);margin:auto}
      </div>
     </div>
     <div id="editorAlert" class="editor-alert" hidden role="status"></div>
+    <div class="callout" style="margin:10px 15px 15px">Për të ruajtur: identifikohu në GitHub kur të kërkohet, bëj ndryshimin, dhe kliko <strong>Ruaj / Publiko</strong>. Nëse ky buton nuk aktivizon ruajtjen, përdor <strong>Publish</strong> brenda redaktorit më poshtë ose <strong>Hap veçmas</strong>. Mos e mbyll formularin para konfirmimit.</div>
     <iframe id="dashboardEditorFrame" class="editor-frame" title="Redaktori i përmbajtjes Vjosa Roses Adventure" loading="lazy" allow="clipboard-write"></iframe>
    </div>
   </section>
@@ -275,7 +277,7 @@ main{max-width:1500px;padding:clamp(20px,4vw,48px);margin:auto}
      const native=buttons.find(b=>/^(Publish|Save|Publiko|Save changes)$/i.test((b.textContent||"").trim()));
      const action=shortcut||native;
      if(!action){
-       alertEditor("Hap një element dhe ndrysho një fushë. Pasi Decap të shfaqë Publish / Save, provo sërish. Përndryshe përdor “Hap veçmas”.");
+       alertEditor("Hap fushat dhe ndrysho të paktën një vlerë. Nëse nuk je identifikuar, kliko “Hap veçmas” dhe hyr në GitHub. Pastaj shtyp Publish te Decap.");
        return;
      }
      action.click();
