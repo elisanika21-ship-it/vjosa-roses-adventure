@@ -58,6 +58,20 @@ main{max-width:1500px;padding:clamp(20px,4vw,48px);margin:auto}
 @media(max-width:1050px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.panels{grid-template-columns:1fr}.insight-stages{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:780px){.sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-102%);transition:transform .2s;box-shadow:10px 0 30px #081c1844}.sidebar.open{transform:translateX(0)}#menuButton{display:inline-block}.grid{grid-template-columns:1fr 1fr}.topbar{padding:13px 16px}.toplinks .small-btn:not(.primary){display:none}.footer{padding:15px}}
 @media(max-width:540px){.grid{grid-template-columns:1fr 1fr;gap:10px}.metric{padding:14px}.metric strong{font-size:24px}.actions,.setup{grid-template-columns:1fr}.insight-stages{grid-template-columns:1fr}.panel{padding:18px}.page-intro h2{font-size:31px}.topbar p{display:none}}
+
+/* Embedded editor: keep the business dashboard navigation visible. */
+.editor-workspace{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 6px 24px #15382709}
+.editor-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;padding:17px 19px;border-bottom:1px solid var(--line);background:#f9fbf7;position:sticky;top:0;z-index:5}
+.editor-toolbar h3{margin:0;font-size:16px;color:var(--pine)}
+.editor-toolbar p{margin:3px 0 0;font-size:12px;color:var(--muted)}
+.editor-tools{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.dashboard-publish{border:none;background:#0f684b;color:#fff;border-radius:24px;padding:10px 18px;font-weight:800;box-shadow:0 4px 14px #0b3f3025}
+.dashboard-publish:hover{background:#0d523e}
+.editor-frame{width:100%;height:min(88vh,1050px);min-height:600px;border:0;display:block;background:white}
+.editor-alert{display:none;background:#fff8e6;color:#765525;padding:12px 19px;font-size:13px;border-bottom:1px solid #efdfa8}
+.editor-alert:not([hidden]){display:block}
+.dashboard-edit-link{display:inline-flex;align-items:center;justify-content:center;border:1px solid #c6d9ca;border-radius:22px;padding:9px 15px;font-size:12px;font-weight:750;background:#fff}
+@media(max-width:780px){.editor-frame{height:78vh;min-height:540px}.editor-toolbar{padding:13px}.editor-tools{width:100%}.dashboard-publish{flex:1}}
 </style>
 </head>
 <body>
@@ -164,6 +178,24 @@ main{max-width:1500px;padding:clamp(20px,4vw,48px);margin:auto}
     </div>
    </div>
   </section>
+
+  <section class="view" id="editor-view" hidden>
+   <div class="page-intro">
+    <div><div class="overline">Dashboard · Menaxhimi i përmbajtjes</div><h2 id="editorTitle">Redakto website-in</h2><p id="editorDescription">Ndrysho të dhënat dhe publiko pa dalë nga Dashboard-i.</p></div>
+    <span class="status">✓ GitHub · Decap CMS</span>
+   </div>
+   <div class="editor-workspace">
+    <div class="editor-toolbar">
+     <div><h3 id="editorSectionLabel">Përmbajtja</h3><p>Butoni publikon formularin që ke hapur, jo një fushë të vetme.</p></div>
+     <div class="editor-tools">
+      <a class="dashboard-edit-link" id="editorExternalLink" href="editor.html" target="_blank" rel="noopener noreferrer">Hap veçmas ↗</a>
+      <button class="dashboard-publish" type="button" id="dashboardPublish">Ruaj / Publiko</button>
+     </div>
+    </div>
+    <div id="editorAlert" class="editor-alert" hidden role="status"></div>
+    <iframe id="dashboardEditorFrame" class="editor-frame" title="Redaktori i përmbajtjes Vjosa Roses Adventure" loading="lazy" allow="clipboard-write"></iframe>
+   </div>
+  </section>
  </main>
  <div class="footer">© <span id="year"></span> Vjosa Roses Adventure · Përmet, Albania · Website-i publik dhe paneli admin</div>
 </div>
@@ -174,12 +206,84 @@ main{max-width:1500px;padding:clamp(20px,4vw,48px);margin:auto}
  const menu=document.getElementById("menuButton");
  menu.addEventListener("click",()=>{sidebar.classList.toggle("open");menu.setAttribute("aria-expanded",String(sidebar.classList.contains("open")))});
  document.addEventListener("click",e=>{if(e.target.closest("a")){sidebar.classList.remove("open");menu.setAttribute("aria-expanded","false")}});
- function show(){
-  const view=location.hash==="#insights"?"insights":"home";
-  document.querySelectorAll(".view").forEach(el=>el.hidden=el.id!==view+"-view");
-  document.querySelectorAll(".nav-item[data-view]").forEach(el=>{el.classList.toggle("active",el.dataset.view===view);if(el.dataset.view===view)el.setAttribute("aria-current","page");else el.removeAttribute("aria-current")});
-  document.title=(view==="insights"?"Insights":"Home Page")+" | Vjosa Roses Admin";
+ const destinations = {
+   "edit-settings": {label:"Home Page · Tekstet",desc:"Titujt, përshkrimet dhe përmbajtja në dy gjuhë.",path:"/collections/site_settings/entries/settings"},
+   "edit-gallery": {label:"Fotografitë & Galeria",desc:"Ngarko fotografi dhe ndrysho renditjen e galerisë.",path:"/collections/gallery/entries/gallery"},
+   "edit-packages": {label:"Paketat Turistike",desc:"Shto, redakto ose çaktivizo paketat.",path:"/collections/tour_packages"},
+   "edit-prices": {label:"Çmimet",desc:"Zgjidh paketën dhe ndrysho çmimin ose On Request.",path:"/collections/tour_packages"},
+   "edit-hospitality": {label:"Akomodimi & Ushqimi",desc:"Redakto shërbimet, përshkrimet dhe çmimet.",path:"/collections/hospitality/entries/hospitality"},
+   "edit-contacts": {label:"Logoja & Kontaktet",desc:"Ndrysho logon, fotografinë Hero, WhatsApp-in dhe kontaktet.",path:"/collections/site_settings/entries/settings"},
+   "edit-integrations": {label:"Integrimet",desc:"Menaxho fushën e Google Analytics dhe të dhënat e lidhjeve.",path:"/collections/site_settings/entries/settings"}
+ };
+ const frame = document.getElementById("dashboardEditorFrame");
+ const notice = document.getElementById("editorAlert");
+ function alertEditor(message){
+   notice.textContent=message;notice.hidden=false;
  }
+ function show(){
+   const key=location.hash.slice(1);
+   const isEdit=Object.prototype.hasOwnProperty.call(destinations,key);
+   const view=isEdit?"editor":key==="insights"?"insights":"home";
+   document.querySelectorAll(".view").forEach(el=>el.hidden=el.id!==view+"-view");
+   document.querySelectorAll(".nav-item").forEach(el=>{
+     const selected=el.dataset.view===view || (isEdit && el.dataset.edit===key);
+     el.classList.toggle("active",selected);
+     if(selected) el.setAttribute("aria-current","page");
+     else el.removeAttribute("aria-current");
+   });
+   if(isEdit){
+     const dest=destinations[key];
+     document.getElementById("editorTitle").textContent=dest.label;
+     document.getElementById("editorSectionLabel").textContent=dest.label;
+     document.getElementById("editorDescription").textContent=dest.desc;
+     const address="editor.html#"+dest.path;
+     document.getElementById("editorExternalLink").href=address;
+     if(frame.dataset.section!==key && frame.getAttribute("src")!==address){
+       frame.src=address;
+       frame.dataset.section=key;
+       notice.hidden=true;
+     }
+   }
+   document.title=(isEdit?destinations[key].label:view==="insights"?"Insights":"Home Page")+" | Vjosa Roses Admin";
+ }
+ // Transform dashboard editor links into navigation within the business dashboard.
+ const map = {
+   "site_settings/entries/settings":"edit-settings",
+   "gallery/entries/gallery":"edit-gallery",
+   "tour_packages":"edit-packages",
+   "hospitality/entries/hospitality":"edit-hospitality"
+ };
+ document.querySelectorAll('a[href^="editor.html#/collections/"]').forEach(a=>{
+   const original=a.getAttribute("href");
+   const path=original.split("/collections/")[1];
+   let key=map[path]||"edit-settings";
+   const label=(a.textContent||"").toLowerCase();
+   if(path==="tour_packages" && /çmim|price/.test(label))key="edit-prices";
+   if(path==="site_settings/entries/settings" && /logo|kontakt|whatsapp/.test(label))key="edit-contacts";
+   if(path==="site_settings/entries/settings" && /integrim|analytics/.test(label))key="edit-integrations";
+   a.href="#"+key;
+   a.dataset.edit=key;
+ });
+ document.getElementById("dashboardPublish").addEventListener("click",()=>{
+   const key=location.hash.slice(1);
+   if(!Object.prototype.hasOwnProperty.call(destinations,key)){alertEditor("Zgjidh fillimisht një seksion për redaktim.");return;}
+   try{
+     const doc=frame.contentWindow.document;
+     const buttons=[...doc.querySelectorAll("button")].filter(b=>b.getClientRects().length&&!b.disabled);
+     // Trigger the editor's existing shortcut if available. It delegates to Decap's own action.
+     const shortcut=buttons.find(b=>b.classList.contains("vra-publish-float"));
+     const native=buttons.find(b=>/^(Publish|Save|Publiko|Save changes)$/i.test((b.textContent||"").trim()));
+     const action=shortcut||native;
+     if(!action){
+       alertEditor("Hap një element dhe ndrysho një fushë. Pasi Decap të shfaqë Publish / Save, provo sërish. Përndryshe përdor “Hap veçmas”.");
+       return;
+     }
+     action.click();
+     alertEditor("U aktivizua veprimi i Decap. Nëse shfaqet Publish now, konfirmoje aty. Kontrollo njoftimin për ruajtjen.");
+   }catch(e){
+     alertEditor("Identifikohu në redaktor nëse kërkohet, ose zgjidh “Hap veçmas” për të publikuar në Decap.");
+   }
+ });
  addEventListener("hashchange",show);show();
  document.getElementById("year").textContent=new Date().getFullYear();
  fetch("../content/gallery.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(d=>{if(d&&Array.isArray(d.photos))document.getElementById("photoCount").textContent=d.photos.length}).catch(()=>{});
