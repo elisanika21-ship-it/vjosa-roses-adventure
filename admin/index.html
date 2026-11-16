@@ -1,14 +1,66 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="sq">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex">
-  <title>Vjosa Roses Adventure | Admin</title>
-</head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b4030"><meta name="robots" content="noindex,nofollow">
+<title>Paneli i Administrimit | Vjosa Roses Adventure</title>
+<style>
+:root{--pine:#0b4030;--pine2:#165c48;--gold:#d0a454;--cream:#faf8f2;--muted:#6b7a72}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#163e2f;background:var(--cream);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+a{text-decoration:none;color:inherit}button{font:inherit}header{background:linear-gradient(125deg,#0b4030,#17614c 75%,#1d7866);color:white;padding:25px clamp(20px,5vw,80px) 38px}
+.top{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;max-width:1240px;margin:auto}.brand{display:flex;align-items:center;gap:14px;font-size:17px;font-weight:750;letter-spacing:.2px}.brand img{width:56px;height:56px;object-fit:contain;background:#fffdf9;border-radius:13px;padding:4px}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}.top-actions a{border:1px solid #ffffff70;padding:10px 15px;border-radius:22px;font-size:13px;color:white}
+.hero{max-width:1240px;margin:45px auto 0}.eyebrow{color:#eacb8d;font-size:12px;font-weight:750;letter-spacing:1.7px}.hero h1{font:normal clamp(34px,5vw,58px) Georgia,serif;margin:13px 0 14px}.hero p{max-width:690px;color:#e1eae4;font-size:16px;line-height:1.7;margin:0}
+main{max-width:1240px;margin:-18px auto 0;padding:0 clamp(18px,3vw,40px) 60px;position:relative}
+.quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.tile{display:flex;flex-direction:column;gap:11px;padding:23px;background:white;border-radius:17px;border:1px solid #e8e6db;box-shadow:0 9px 24px #0c38200d;min-height:218px;transition:transform .15s,box-shadow .15s}
+.tile:hover,.tile:focus-visible{transform:translateY(-3px);box-shadow:0 12px 30px #0c38201c;outline-color:#bfa057}.tile .symbol{display:inline-flex;width:46px;height:46px;align-items:center;justify-content:center;background:#eef4ec;font-size:25px;border-radius:13px}
+.tile h2{font-size:19px;margin:1px 0 0;color:var(--pine)}.tile p{font-size:13px;line-height:1.65;color:#62736a;margin:0;flex:1}.go{color:#9c7224;font-size:13px;font-weight:750}
+.under{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.8fr);gap:19px;margin-top:26px}
+.panel{padding:25px;background:#fff;border:1px solid #e6e5db;border-radius:17px}.panel h3{margin:0 0 14px;font-size:19px}.steps{list-style:none;padding:0;margin:0;display:grid;gap:12px}.steps li{display:flex;gap:12px;align-items:flex-start;color:#55695e;font-size:14px;line-height:1.55}.stepno{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:50%;background:#e5eee4;color:#16523e;font-weight:800;font-size:12px}
+.hint{font-size:13px;color:#5c7164;line-height:1.7}.notice{display:flex;gap:10px;padding:15px;border-radius:12px;background:#f2f4e9;color:#58683c;font-size:13px;line-height:1.55}.notice span{font-size:18px}.pill{display:inline-block;padding:7px 12px;border-radius:25px;background:#e4efea;color:#175743;font-size:12px;font-weight:750;margin-bottom:12px}
+footer{text-align:center;font-size:12px;color:#758078;padding:20px}footer a{text-decoration:underline}
+@media(max-width:950px){.quick{grid-template-columns:repeat(2,minmax(0,1fr))}.under{grid-template-columns:1fr}}@media(max-width:560px){header{padding:18px 20px 40px}.hero{margin-top:36px}.quick{grid-template-columns:1fr;gap:12px}.tile{min-height:160px;padding:20px}.brand{font-size:15px}.hero p{font-size:14px}.under{gap:14px}.panel{padding:19px}}
+</style></head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-</body>
-</html>
+<header>
+ <div class="top">
+  <div class="brand"><img src="../assets/logo.webp" alt="Logo Vjosa Roses Adventure"><span>Vjosa Roses Adventure<br><small style="font-weight:450;font-size:12px;opacity:.8">Paneli i Administrimit</small></span></div>
+  <div class="top-actions"><a href="../" target="_blank" rel="noopener noreferrer">Shiko website-in ↗</a><a href="editor.html">Hap redaktorin</a></div>
+ </div>
+ <div class="hero">
+  <div class="eyebrow">MIRË SE ERDHE 🌹</div>
+  <h1>Menaxho faqen me lehtësi.</h1>
+  <p>Ndrysho fotografitë, paketat, çmimet, tekstet, akomodimin dhe kontaktet nga një vend i vetëm. Zgjidh seksionin më poshtë për të hapur redaktorin.</p>
+ </div>
+</header>
+<main>
+ <section class="quick" aria-label="Seksionet e administrimit">
+  <a class="tile" href="editor.html#/collections/gallery/entries/gallery"><span class="symbol">🖼️</span><h2>Fotografitë & Galeria</h2><p>Ndrysho fotografitë, renditjen dhe përshkrimet. Emrat e autorëve mbeten vetëm te kreditet e licencave.</p><span class="go">Menaxho fotografitë →</span></a>
+  <a class="tile" href="editor.html#/collections/tour_packages"><span class="symbol">🏞️</span><h2>Paketat Turistike</h2><p>Shto, edito, publiko dhe hiq paketa. Plotëso përshkrimet në shqip dhe anglisht.</p><span class="go">Menaxho paketat →</span></a>
+  <a class="tile" href="editor.html#/collections/tour_packages"><span class="symbol">💶</span><h2>Çmimet</h2><p>Zgjidh paketën dhe ndrysho çmimin. Mund të përdorësh edhe “On Request”.</p><span class="go">Ndrysho çmimet →</span></a>
+  <a class="tile" href="editor.html#/collections/site_settings/entries/settings"><span class="symbol">✍️</span><h2>Tekstet e faqes</h2><p>Redakto titujt, përshkrimet, përmbajtjen e faqes kryesore dhe të dyja gjuhët.</p><span class="go">Ndrysho tekstet →</span></a>
+  <a class="tile" href="editor.html#/collections/hospitality/entries/hospitality"><span class="symbol">🛏️</span><h2>Akomodimi & Ushqimi</h2><p>Menaxho shërbimet, ofertat, çmimet dhe fotot për bujtinat dhe gastronominë.</p><span class="go">Menaxho shërbimet →</span></a>
+  <a class="tile" href="editor.html#/collections/site_settings/entries/settings"><span class="symbol">🌹</span><h2>Logoja & Kontaktet</h2><p>Përditëso logon, foton kryesore, WhatsApp-in, emailin dhe të dhënat e biznesit.</p><span class="go">Hap cilësimet →</span></a>
+ </section>
+ <div class="under">
+  <section class="panel">
+   <h3>Si bëhet një ndryshim?</h3>
+   <ol class="steps">
+    <li><span class="stepno">1</span><span>Zgjidh seksionin që dëshiron të ndryshosh nga kutitë sipër.</span></li>
+    <li><span class="stepno">2</span><span>Nëse të kërkohet, identifikohu te GitHub me llogarinë e autorizuar.</span></li>
+    <li><span class="stepno">3</span><span>Redakto tekstin, fotografinë ose çmimin; pastaj zgjidh <strong>Publish / Publiko</strong>.</span></li>
+    <li><span class="stepno">4</span><span>Hap website-in publik dhe rifreskoje për të parë ndryshimin.</span></li>
+   </ol>
+  </section>
+  <section class="panel">
+   <span class="pill">Lidhja aktuale është e sigurt</span>
+   <h3>Hyrja në panel</h3>
+   <p class="hint">Paneli mund të hapet nga telefoni, tableti ose kompjuteri, kudo që ke internet. Redaktimi i përmbajtjes vazhdon të kërkojë identifikimin ekzistues në GitHub; kjo faqe hyrëse nuk kërkon dhe nuk ruan fjalëkalime.</p>
+   <div class="notice"><span>🔒</span><div><strong>Për sigurinë:</strong> Mos dërgo kurrë fjalëkalime në mesazhe. Hyrja e veçantë me email dhe fjalëkalim kërkon një shërbim identiteti të konfiguruar në mënyrë të sigurt.</div></div>
+  </section>
+ </div>
+</main>
+<footer>© <span id="y"></span> Vjosa Roses Adventure · <a href="../">Faqja publike</a></footer>
+<script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+</body></html>
