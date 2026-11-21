@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://hvzagbcnbbwppwqhdavc.supabase.co; img-src 'self' data:; form-action 'self'; base-uri 'none'; frame-ancestors 'none'">
+<title>Hyrje me email | Vjosa Roses Adventure</title>
+<style>
+*{box-sizing:border-box}body{min-height:100vh;margin:0;background:linear-gradient(138deg,#092f24,#155840);display:grid;place-items:center;padding:22px;color:#163a2f;font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{width:min(450px,100%);background:#fffdf8;border-radius:22px;padding:32px;box-shadow:0 24px 70px #001b164f}
+h1{font-size:26px;margin:8px 0 0;color:#104532}h2{font-size:14px;font-weight:500;color:#64796e;margin:0 0 20px}.rose{font-size:28px}
+label{display:block;font-weight:650;margin:15px 0 6px}input{width:100%;border:1px solid #c9d5cc;border-radius:10px;padding:12px;font:inherit;background:white}input:focus{outline:2px solid #478d70}
+button{font:inherit;cursor:pointer}button.primary{width:100%;background:#0d6546;border:0;color:white;border-radius:10px;padding:13px;font-weight:750;margin:18px 0 5px}
+button.primary:disabled{opacity:.55;cursor:wait}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}.actions button{border:1px solid #c7d6ca;background:white;color:#154937;border-radius:20px;padding:7px 12px;font-size:13px}
+.actions button[aria-pressed=true]{background:#e8f3e8;border-color:#167b52;font-weight:750}
+#status{white-space:pre-line;border-radius:10px;background:#f5f7f1;color:#304b40;padding:13px;font-size:13px;margin:12px 0}#status[hidden]{display:none}
+.small{font-size:12px;color:#62776a}.small a{color:#0d684b}
+.hidden{display:none!important}
+</style>
+</head>
+<body><main>
+<div class="rose">🌹</div><h1>Vjosa Roses Adventure</h1>
+<h2>Identifikimi me email · Konfigurim në provë</h2>
+<div class="actions">
+<button type="button" id="mode-login" aria-pressed="true">Hyr</button>
+<button type="button" id="mode-signup" aria-pressed="false">Krijo llogarinë</button>
+<button type="button" id="mode-recover" aria-pressed="false">Harrova password-in</button>
+</div>
+<form id="authForm">
+<label for="email">Emaili i biznesit</label>
+<input id="email" autocomplete="username" type="email" value="vjosarosesadventure@gmail.com" readonly required>
+<div id="passwordBlock"><label for="password">Fjalëkalimi</label>
+<input id="password" type="password" minlength="8" autocomplete="current-password" required placeholder="Shkruaj fjalëkalimin vetëm këtu"></div>
+<button class="primary" id="submit" type="submit">Hyr me email</button>
+</form>
+<div id="status" role="status" aria-live="polite" hidden></div>
+<p class="small">Password-i dërgohet vetëm te Supabase për autentikim; kjo faqe nuk e ruan atë. Regjistrimi kërkon verifikim me email.</p>
+<p class="small"><strong>E rëndësishme:</strong> hyrja me email është në fazë prove. Për të publikuar foto dhe tekste, Decap ende kërkon leje GitHub. Nuk është çaktivizuar hyrja ekzistuese.</p>
+<p class="small"><a href="./">Kthehu në Dashboard</a></p>
+</main>
+<script>
+(()=>{
+"use strict";
+const URL="https://hvzagbcnbbwppwqhdavc.supabase.co";
+const KEY="sb_publishable_HVrX5PL4nYvSeojuH0y6Fg_-3cStA0K";
+const EMAIL="vjosarosesadventure@gmail.com";
+let mode="login";
+const $=id=>document.getElementById(id);
+const status=$("status");
+function message(s){status.hidden=false;status.textContent=s}
+function setMode(next){
+ mode=next;
+ for(const v of ["login","signup","recover"]) $("mode-"+v).setAttribute("aria-pressed",String(v===mode));
+ $("passwordBlock").classList.toggle("hidden",mode==="recover");
+ $("password").required=mode!=="recover";
+ $("password").autocomplete=mode==="signup"?"new-password":"current-password";
+ $("submit").textContent=mode==="login"?"Hyr me email":mode==="signup"?"Krijo llogarinë":"Dërgo emailin e rikuperimit";
+ status.hidden=true;
+}
+for(const v of ["login","signup","recover"]) $("mode-"+v).addEventListener("click",()=>setMode(v));
+async function request(path,body){
+ const res=await fetch(URL+"/auth/v1/"+path,{method:"POST",headers:{"Content-Type":"application/json",apikey:KEY},body:JSON.stringify(body)});
+ const data=await res.json().catch(()=>({}));
+ if(!res.ok)throw new Error(data.msg||data.error_description||data.message||"Gabim gjatë identifikimit. Provo përsëri.");
+ return data;
+}
+$("authForm").addEventListener("submit",async e=>{
+ e.preventDefault(); const email=$("email").value.trim().toLowerCase();
+ if(email!==EMAIL){message("Ky ekran është vetëm për emailin e biznesit.");return;}
+ const pass=$("password").value;
+ if(mode!=="recover"&&pass.length<8){message("Fjalëkalimi duhet të ketë të paktën 8 karaktere.");return;}
+ $("submit").disabled=true;status.hidden=true;
+ try{
+  if(mode==="signup"){
+    const data=await request("signup",{email,password:pass});
+    if(data.access_token && data.user?.email?.toLowerCase()===EMAIL){
+      sessionStorage.setItem("vra_admin_supabase_access",data.access_token);
+    }
+    message("Kërkesa u dërgua. Kontrollo emailin për lidhjen e verifikimit. Pastaj kthehu këtu te 'Hyr'.");
+  }else if(mode==="recover"){
+    await request("recover",{email});
+    message("Nëse kjo llogari ekziston, Supabase do të dërgojë udhëzimet e rikuperimit në email. Kontrollo edhe Spam.");
+  }else{
+    const data=await request("token?grant_type=password",{email,password:pass});
+    if(!data.access_token||data.user?.email?.toLowerCase()!==EMAIL)throw new Error("Identifikimi nuk u verifikua për emailin e biznesit.");
+    // Session-only storage: never store passwords or service-role keys.
+    sessionStorage.setItem("vra_admin_supabase_access",data.access_token);
+    sessionStorage.setItem("vra_admin_supabase_exp",String(Date.now()+Math.min(Number(data.expires_in)||3600,3600)*1000));
+    $("password").value="";
+    message("Identifikimi me email u krye. Supabase është lidhur për hyrjen. Publikimi në Decap vazhdon të kërkojë GitHub.");
+    const link=document.createElement("a");link.href="./";link.textContent=" Hap Dashboard-in →";link.style.display="block";link.style.marginTop="9px";status.appendChild(link);
+  }
+ }catch(err){message(err.message||"Nuk u krye identifikimi.");}
+ finally{$("submit").disabled=false; if(mode!=="login")$("password").value="";}
+});
+})();
+</script>
+</body></html>
